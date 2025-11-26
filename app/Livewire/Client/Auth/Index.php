@@ -8,10 +8,12 @@ use Livewire\Component;
 class Index extends Component{
     public $email_number;
 
-    public function mount()
-    {
+    public function mount(){
 
     }
+
+
+
 
     public function login(){
         dd('این تابع اجرا میشه');
