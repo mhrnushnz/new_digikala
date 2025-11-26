@@ -1,0 +1,30 @@
+**databases lists**
+
+
+---------------------------------------------------------------
+       * tables name *       ||      * done or not *
+----------------------------------------------------------------
+users                        =>      done
+admins                       =>      done
+sellers                      =>      done
+products                     =>      done
+categories                   =>      done
+category_attribute           =>      done
+category_attribute_value     =>      done
+product_attribute_values     =>      done
+countries                    =>      done
+states                       =>      done
+cities                       =>      done
+address                      =>      done
+delivery_method              =>      done
+payments_method              =>      done
+orders                       =>      done
+order_item                   =>      done
+product_images               =>      done
+product_reviews              =>      done
+carts                        =>      done
+cart_items                   =>
+city_areas                   =>
+payments                     =>      done
+
+#

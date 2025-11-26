@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Yekan Bakh';
+    src: url('/public/fonts/Yekan-Bakh-Fa-06-Bold.woff') format('woff');
+}
+
+.font{
+    font-family: 'Yekan Bakh';
+}
