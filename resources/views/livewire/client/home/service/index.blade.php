@@ -1,6 +1,7 @@
 <div>
     <section
         class="services container d-flex overflow-x-auto px-lg-0 flex-md-wrap align-items-center justify-content-center gap-3 gap-lg-5 mt-3 mt-lg-5">
+
         <div class="d-flex flex-column align-items-center justify-content-center gap-2">
             <a href="#">
                 <img width="50" src="/client/assets/services/jet.png" alt="digikala jet" />

@@ -8,11 +8,6 @@ use Livewire\Component;
 class Index extends Component{
     public $email_number;
 
-    public function mount(){
-
-    }
-
-
 
 
     public function login(){
@@ -34,29 +29,31 @@ class Index extends Component{
         return redirect()->route('home');
     }
 
+
+
+
+
     public function redirectToProvider(){
 
-
-        return redirect()->to(
-            Socialite::driver('google')->redirect()->getTargetUrl()
-        );    //این میره وصل میشه به گوگل
-
+        return Socialite::driver('google')->redirect();
 
     }
 
 
     public function handelProviderCallback(){
-        $repository = new ClientAuthRepository();     //به روش های تابع boot نمی تونیم از ریپازیتوری استفاده کنیم برای همین اینجوری از همون ریپازیتوری شی میسازیم!
-        $gmailUser = Socialite::driver('google')->stateless()->user();    //کاربر رو میسازه اکانت گوگلش رو
-        $repository->CheckUser($gmailUser);
-        return redirect()->route('home');
+        $gmailUser = Socialite::driver('google')->stateless()->user();
+        return Socialite::driver('google')->redirect();
     }
+
+
+
 
     public function clientLogout(){
         session()->flush();                            //1.حذف سشن
         Auth::logout(); //2.خروج کاربر از حساب کاربری
         return redirect()->route('client.auth.index');    //3.رفتن به صفحه مورد نظر
     }
+
 
 
     public function render(){

@@ -2,6 +2,8 @@
     @push('style')
         <link rel="stylesheet" href="/client/css/product.css" />
     @endpush
+
+
         <!-- === mobile add to card === -->
         <div class="fixed-bottom bg-white d-lg-none border-top bg-danger py-4 px-3">
             <!-- text slider -->
@@ -48,6 +50,7 @@
             <a href="#" class="text-secondary">ساعت هوشمند</a>
         </div>
 
+
         <!-- ====== Product Detail ====== -->
         <section class="my-lg-5 row mx-lg-5">
             <!-- === Picture === -->
@@ -57,6 +60,7 @@
             <!-- === Seller Detail === -->
             <livewire:client.product.buybox :productId="$products->id"  :price="$products->price" :discount="$products->discount" :finalprice="$products->finalprice"/>
         </section>
+
 
         <!-- ====== Product Options ====== -->
         <section class="container my-lg-5 mx-auto d-flex align-items-center justify-content-center gap-md-5 options">
@@ -88,7 +92,7 @@
 
 
         <!-- ====== product datalise ====== -->
-        <livewire:client.product.tabs />
+        <livewire:client.product.tabs :productId="$products->id"/>
 
 
 

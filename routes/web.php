@@ -53,6 +53,6 @@ Route::get('/auth', ClientIndex::class)->name('client.auth.index');
 Route::get('/logout', [ClientIndex::class,'clientLogout'])->name('client.auth.logout');
 Route::get('/auth/gmail', [ClientIndex::class, 'redirectToProvider'])->name('gmail');
 Route::get('/auth/gmail/callback', [ClientIndex::class, 'handelProviderCallback'])->name('callback');
-Route::get('/client/product/{p_code}/{slug?}', ClientProduct::class)->name('client.product.index');
+Route::get('/client/product/{p_code?}/{slug?}', ClientProduct::class)->name('client.product.index');
 
 

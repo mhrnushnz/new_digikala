@@ -6,25 +6,33 @@
 
     <!-- ====== Product more Details ====== -->
     <section id="details">
-        <ul class="swiper myProductFeatureSwiper nav nav-tabs px-0 px-lg-auto" id="nav">
+        <ul wire:ignore class="swiper myProductFeatureSwiper nav nav-tabs px-0 px-lg-auto" id="nav">
             <div class="swiper-wrapper">
-                <li class="swiper-slide nav-item border-0 fs-8 active" data-target="#intro-content">
+                <li wire:click="changeTab(1)" class="swiper-slide nav-item border-0 fs-8 active" data-target="#intro-content">
                     <a class="nav-link d-flex flex-column" href="#">معرفی</a>
                     <span class="indicator"></span>
                 </li>
-                <li class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#review-content">
+
+
+                <li wire:click="changeTab(2)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#review-content">
                     <a class="nav-link d-flex flex-column text-nowrap" href="#">بررسی تخصصی</a>
                     <span class="indicator"></span>
                 </li>
-                <li class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#detail-content">
+
+
+                <li wire:click="changeTab(3)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#detail-content">
                     <a class="nav-link d-flex flex-column" href="#">مشخصات</a>
                     <span class="indicator"></span>
                 </li>
-                <li class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#comment-content">
+
+
+                <li wire:click="changeTab(4)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#comment-content">
                     <a class="nav-link d-flex flex-column" href="#">دیدگاه‌ها</a>
                     <span class="indicator"></span>
                 </li>
-                <li class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#question-content">
+
+
+                <li wire:click="changeTab(5)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#question-content">
                     <a class="nav-link d-flex flex-column" href="#">پرسش‌ها</a>
                     <span class="indicator"></span>
                 </li>
@@ -77,6 +85,9 @@
                     </button>
                 </div>
             </div>
+
+
+
             <!-- reviews -->
             <div id="review-content" class="content-div mx-lg-5">
                 <div class="d-flex flex-column mb-3">
@@ -92,7 +103,10 @@
                         کند. در ادامه به بررسی کامل این گوشی پرداخته می‌پردازیم.
                     </p>
                     <div class="more-content">
-                        <hr />
+
+
+                        <hr/>
+
 
                         <p class="fw-bold my-lg-4">طراحی و ساخت</p>
                         <div class="row mb-3">
