@@ -40,7 +40,7 @@
         </ul>
         <div id="content" class="mt-4">
             <!-- introduction -->
-            <div id="intro-content" class="content-div mx-lg-5 active">
+            <div {{$active == 1 ? 'active' : ''}} id="intro-content" class="content-div mx-lg-5 active">
                 <div class="d-flex flex-column mb-3">
                     <h5>معرفی</h5>
                     <div class="border-title"></div>
@@ -87,9 +87,8 @@
             </div>
 
 
-
             <!-- reviews -->
-            <div id="review-content" class="content-div mx-lg-5">
+            <div {{$active == 2 ? 'active' : ''}} id="review-content" class="content-div mx-lg-5">
                 <div class="d-flex flex-column mb-3">
                     <h5>بررسی تخصصی</h5>
                     <div class="border-title"></div>
@@ -219,8 +218,10 @@
                     </button>
                 </div>
             </div>
+
+
             <!-- details -->
-            <div id="detail-content" class="content-div mx-lg-5">
+            <div {{$active == 3 ? 'active' : ''}} id="detail-content" class="content-div mx-lg-5">
                 <div class="d-flex flex-column mb-3">
                     <h5>مشخصات</h5>
                     <div class="border-title"></div>
@@ -232,12 +233,13 @@
                         <div class="content-section">
                             <div class="d-flex align-items-center flex-wrap gap-5">
                                 <div class="d-flex flex-column gap-4 fs-8 text-secondary">
-                                    <p>توضیحات سیم کارت</p>
+                                    <p>قیمت</p>
                                     <p>تعداد سیم کارت</p>
                                     <p>دسته ‌بندی</p>
                                 </div>
+
                                 <div class="d-flex flex-column gap-4 fs-8">
-                                    <p>توضیحات سیم کارت</p>
+                                    <p>{{$price}}</p>
                                     <p>تعداد سیم کارت</p>
                                     <p>دسته ‌بندی</p>
                                 </div>
@@ -301,8 +303,10 @@
                     </button>
                 </div>
             </div>
+
+
             <!-- comments -->
-            <div id="comment-content" class="content-div mx-lg-5">
+            <div {{$active == 4 ? 'active' : ''}} id="comment-content" class="content-div mx-lg-5">
                 <div class="d-flex flex-column mb-3">
                     <h5>امتیاز و دیدگاه کاربران</h5>
                     <div class="border-title"></div>
@@ -1002,6 +1006,8 @@
                     </div>
                 </div>
             </div>
+
+
             <!-- comment modal -->
             <div
                 class="modal fade"
@@ -1081,6 +1087,8 @@
                     </div>
                 </div>
             </div>
+
+
             <!-- questions -->
             <div id="question-content" class="content-div mx-lg-5">
                 <div class="d-flex flex-column mb-3">
@@ -1426,6 +1434,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- Question modal -->
             <div

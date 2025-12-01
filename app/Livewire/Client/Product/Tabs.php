@@ -10,16 +10,18 @@ class Tabs extends Component{
     public $productId;
     public $shortdescription;
     public $longdescription;
-
+    public $price;
+    public $active = 0;
 
     public function changeTab($num){
         $product = Product::query()->where('id', $this->productId)->first();
-
+        $this->active = $num;
         if($num == 1){
             $this->shortdescription = $product->name;
-            dd($this->shortdescription);
-        }elseif ($num == 2){
 
+
+        }elseif ($num == 3){
+            $this->price = $product->price;
         }
     }
 
