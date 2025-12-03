@@ -13,24 +13,20 @@
                     <span class="indicator"></span>
                 </li>
 
-
                 <li wire:click="changeTab(2)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#review-content">
                     <a class="nav-link d-flex flex-column text-nowrap" href="#">بررسی تخصصی</a>
                     <span class="indicator"></span>
                 </li>
-
 
                 <li wire:click="changeTab(3)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#detail-content">
                     <a class="nav-link d-flex flex-column" href="#">مشخصات</a>
                     <span class="indicator"></span>
                 </li>
 
-
                 <li wire:click="changeTab(4)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#comment-content">
                     <a class="nav-link d-flex flex-column" href="#">دیدگاه‌ها</a>
                     <span class="indicator"></span>
                 </li>
-
 
                 <li wire:click="changeTab(5)" class="swiper-slide nav-item border-0 fs-8 d-flex flex-column" data-target="#question-content">
                     <a class="nav-link d-flex flex-column" href="#">پرسش‌ها</a>
@@ -38,36 +34,22 @@
                 </li>
             </div>
         </ul>
+
+
         <div id="content" class="mt-4">
             <!-- introduction -->
-            <div {{$active == 1 ? 'active' : ''}} id="intro-content" class="content-div mx-lg-5 active">
+            <div id="intro-content" class="content-div mx-lg-5 {{ $active == 1 ? 'active' : '' }}">
                 <div class="d-flex flex-column mb-3">
                     <h5>معرفی</h5>
                     <div class="border-title"></div>
                 </div>
                 <div class="content-section">
                     <p class="fs-8">
-                        پس از گذشت چند ماه از معرفی phone 2، کمپانی تازه‌نفس ناتینگ، سومین گوشی هوشمند خود با عنوان Phone 2a را
-                        به بازار معرفی کرد. این گوشی موبایل با پیروی از طراحی زیبا و منحصر به فرد ناتینگ، سخت افزار قدرتمند و
-                        صفحه نمایش با کیفیت، توانسته است همانند دو مدل پیشین در مدت زمان کمی طرفداران پرشماری در سراسر دنیا پیدا
-                        کند. در طراحی پشت گوشی، همان فرم شفاف و شیشه‌ای که امضای ناتینگ است، حفظ شده است؛ با این تفاوت که، LEDها
-                        در مقایسه با phone 2 به 3 عدد کاهش پیدا کرده‌اند. در پشت گوشی دو ..
+                        {{ $shortdescription }}
                     </p>
                     <div class="more-content">
                         <p class="fs-8">
-                            پس از گذشت چند ماه از معرفی phone 2، کمپانی تازه‌نفس ناتینگ، سومین گوشی هوشمند خود با عنوان Phone 2a
-                            را به بازار معرفی کرد. این گوشی موبایل با پیروی از طراحی زیبا و منحصر به فرد ناتینگ، سخت افزار قدرتمند
-                            و صفحه نمایش با کیفیت، توانسته است همانند دو مدل پیشین در مدت زمان کمی طرفداران پرشماری در سراسر دنیا
-                            پیدا کند. در طراحی پشت گوشی، همان فرم شفاف و شیشه‌ای که امضای ناتینگ است، حفظ شده است؛ با این تفاوت
-                            که، LEDها در مقایسه با phone 2 به 3 عدد کاهش پیدا کرده‌اند. در پشت گوشی دو دوربین 50 مگاپیکسلی عریض و
-                            فوق عریض تعبیه شده‌اند که تصاویر فوق العاده با کیفیتی ثبت می‌کنند و در کنار دوربین سلفی 32 مگاپیکسلی،
-                            یک پکیج دوربین قدرتمند را تشکیل می‌دهند. در جلوی گوشی، یک صفحه نمایش با کیفیت و شفاف 6.7 اینچی با
-                            تراکم پیکسلی 394 تعبیه شده است که روشنایی فوق العاده‌ی 1300 نیت دارد. در بخش پردازنده، ناتینگ 2a به یک
-                            پردازنده هشت هسته‌ای با چیپست Mediatek Dimensity 7200 Pro (4n) مجهز شده است که عملکرد قدرتمندی دارد.
-                            باتری این گوشی ظرفیت 5000 میلی‌آمپرساعتی دارد و از شارژ سریع 45 واتی پشتیبانی می‌کند. در بخش سیستم
-                            عامل، کمپانی ناتینگ، اندروید نسخه 14.0 با فضای کاربری Nothing OS2.5.5 را روی این گوشی نصب کرده است و
-                            فناوری تشخیص چهره، حسگر اثر انگشت زیر صفحه نمایش و حافظه رم 12 گیگابایتی، ارزش خرید این موبایل را
-                            افزایش داده‌اند.
+                            {{$longdescription}}
                         </p>
                     </div>
                     <button class="toggle-btn fs-8 text-info mt-2">
@@ -88,18 +70,15 @@
 
 
             <!-- reviews -->
-            <div {{$active == 2 ? 'active' : ''}} id="review-content" class="content-div mx-lg-5">
+            <div id="review-content" class="content-div mx-lg-5 {{ $active == 2 ? 'active' : '' }}">
                 <div class="d-flex flex-column mb-3">
                     <h5>بررسی تخصصی</h5>
                     <div class="border-title"></div>
                 </div>
                 <div class="content-section">
-                    <h6 class="my-2">ناتینگ فون 2a خاص ترین میان رده بازار</h6>
+                    <h6 class="my-2">{{ $name }}</h6>
                     <p class="fs-8">
-                        پس از گذشت چند ماه از معرفی phone 2، کمپانی تازه‌نفس ناتینگ، سومین گوشی هوشمند خود با عنوان Phone 2a را
-                        به بازار معرفی کرد. این گوشی موبایل با پیروی از طراحی زیبا و منحصر به فرد ناتینگ، سخت افزار قدرتمند و
-                        صفحه نمایش با کیفیت، توانسته است همانند دو مدل پیشین در مدت زمان کم، طرفداران پرشماری در سراسر دنیا پیدا
-                        کند. در ادامه به بررسی کامل این گوشی پرداخته می‌پردازیم.
+                        {{$check_pointly}}
                     </p>
                     <div class="more-content">
 
@@ -221,7 +200,7 @@
 
 
             <!-- details -->
-            <div {{$active == 3 ? 'active' : ''}} id="detail-content" class="content-div mx-lg-5">
+            <div id="detail-content" class="content-div mx-lg-5 {{$active == 3 ? 'active' : ''}}" >
                 <div class="d-flex flex-column mb-3">
                     <h5>مشخصات</h5>
                     <div class="border-title"></div>
@@ -306,7 +285,7 @@
 
 
             <!-- comments -->
-            <div {{$active == 4 ? 'active' : ''}} id="comment-content" class="content-div mx-lg-5">
+            <div  id="comment-content" class="content-div mx-lg-5 {{$active == 4 ? 'active' : ''}}">
                 <div class="d-flex flex-column mb-3">
                     <h5>امتیاز و دیدگاه کاربران</h5>
                     <div class="border-title"></div>
@@ -1090,7 +1069,7 @@
 
 
             <!-- questions -->
-            <div id="question-content" class="content-div mx-lg-5">
+            <div  id="question-content" class="content-div mx-lg-5 {{$active == 5 ? 'active' : ''}}">
                 <div class="d-flex flex-column mb-3">
                     <h5>پرسش‌ها</h5>
                     <div class="border-title"></div>

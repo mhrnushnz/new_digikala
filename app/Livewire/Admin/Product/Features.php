@@ -28,6 +28,12 @@ class Features extends Component{
         $featureValueIds = [];
         foreach ($this->featureIdValue as $value) {
             list($featureId, $featureValueId) = explode('_', $value);
+            $parts = explode('_', $value);
+            // اگر نتونست دوتا مقدار جدا کنه، ردش کن
+            if (count($parts) !== 2) {
+                continue;
+            }
+
             $featureIds[] = $featureId;
             $featureValueIds[] = $featureValueId;
 
@@ -51,8 +57,11 @@ class Features extends Component{
             'feature_value_ids.*.exists' => 'مقادیر ویژگی نامعتبر است',
         ]);
 
+
         $validator->validate();
+        $this->dispatch('success', 'عملیات با موفقیت انجام شد!');
         $this->resetValidation();
+
 
     }
 

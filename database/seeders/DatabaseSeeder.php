@@ -20,7 +20,15 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             SeoItemsTableSeeder::class,
             ProductsTableSeeder::class,
-            ProductImagesTableSeeder::class
+            ProductImagesTableSeeder::class,
+            DefaultDataSeeder::class
         ]);
+        $this->call(CategoryFeaturesTableSeeder::class);
+        $this->call(CategoryFeatureValuesTableSeeder::class);
+        $this->call(SeoItemsTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
+        $this->call(StatesTableSeeder::class);
+        $this->call(CountriesTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
     }
 }

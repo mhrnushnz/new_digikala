@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_feature_values', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id');
             $table->foreignId('category_feature_id')->constrained();  //ایدی مقدار
             $table->foreignId('category_feature_value_id')->constrained();       //ایدی ولیو عه مقدار
             $table->timestamps();

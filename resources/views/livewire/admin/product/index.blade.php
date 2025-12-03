@@ -11,10 +11,11 @@
 
                 <strong>هشدار!</strong>
                 {{sesstion()->get('success')}}
-
             </div>
 
         @endif
+
+
 
         <table id="zero-config" class="table table-hover" style="width:100%">
             <thead>

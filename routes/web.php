@@ -17,7 +17,6 @@ use App\Livewire\Admin\Story\Index as StoryIndex;
 use App\Livewire\Admin\slider\Index as SliderIndex;
 
 
-
 use App\Livewire\Client\Auth\Index as ClientIndex;
 use App\Livewire\Client\Home\Home as ClientHome;
 use App\Livewire\Client\Product\Index as ClientProduct;
@@ -43,9 +42,7 @@ Route::get('/story', StoryIndex::class)->name('admin.story.index');
 Route::get('/slider', SliderIndex::class)->name('admin.slider.index');
 
 
-
 //client
-
 
 
 Route::get('/', ClientHome::class)->name('home');

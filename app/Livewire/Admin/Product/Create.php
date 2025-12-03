@@ -38,14 +38,14 @@ class Create extends Component{
 
 
     public function mount(){
-
         $this->sellers = Seller::all();
         $this->categories = Category::all();
 
 
 
         if (isset($_GET['p_id'])) {
-            $this->product = Product::with('seo', 'images')->findOrFail($_GET['p_id']);
+            $this->product = Product::with('seo', 'images')->findOrFail(request('p_id'));
+            $this->productId = $this->product->id;
             $this->name = $this->product->name;
             $this->slug = $this->product->seo->slug ?? '';
             $this->meta_title = $this->product->seo->meta_title ?? '';
@@ -59,10 +59,6 @@ class Create extends Component{
             $this->categoryId = $this->product->category_id;
             $this->coverIndex = $this->product->images->search(fn($img) => $img->is_cover);
         }
-
-
-
-
     }
 
 
