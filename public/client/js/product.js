@@ -108,7 +108,11 @@ $(document).ready(function () {
     spaceBetween: 10,
   });
 
+
+
+
   // Add positive points
+  /*
   $("#addButtonPositive").click(function () {
     let inputText = $("#inputTextPositive").val();
 
@@ -157,6 +161,9 @@ $(document).ready(function () {
       $("#inputTextNegative").val(""); // Clear the input after adding
     }
   });
+    */
+
+
 
   // Event delegation for dynamically created delete buttons
   $(document).on("click", ".deleteButton", function () {
@@ -168,15 +175,15 @@ $(document).ready(function () {
   // Quesiton Modal
   const maxAlphabets = 100;
   const minAlphabets = 10;
-  
+
   $('#textArea').on('input', function() {
       const text = $(this).val();
       const alphabets = text.replace(/[^a-zA-Z]/g, ''); // Filter only alphabetic characters
       const alphabetCount = alphabets.length;
-      
+
       // Update character count display
       $('#charCount').text(`${alphabetCount} / ${maxAlphabets}`);
-      
+
       // Enable or disable button
       if (alphabetCount >= minAlphabets && alphabetCount <= maxAlphabets) {
           $('#submitButton').prop('disabled', false);

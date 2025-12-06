@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('states', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
-            $table->timestamps();
+        Schema::table('product_reviews', function (Blueprint $table) {
+            $table->text("positive")->after("comment")->nullable();
+            $table->text("negative")->after("positive")->nullable();
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('states');
+        Schema::table('product_reviews', function (Blueprint $table) {
+            $table->dropColumn(["positive", "negative"]);
+        });
     }
 };

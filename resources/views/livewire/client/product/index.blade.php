@@ -92,7 +92,7 @@
 
 
         <!-- ====== product datalise ====== -->
-        <livewire:client.product.tabs :productId="$products->id"/>
+        <livewire:client.product.tabs :productId="$products->id" :name="$products->name"/>
 
 
 
