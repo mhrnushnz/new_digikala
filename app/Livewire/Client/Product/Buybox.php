@@ -11,6 +11,7 @@ class Buybox extends Component{
     public $finalprice;
     public $productId;
     public $inCart = false;
+    public $seller;
 
     public function addtocart(){
         Cart::query()->updateOrCreate([

@@ -13,7 +13,7 @@ class Index extends Component{
 
         $product = Product::query()->where('p_code', $p_code)
         ->select('id', 'name', 'p_code', 'price', 'discount', 'discount_duration','category_id', 'stock', 'seller_id','featured',)
-        ->with('Images')->firstOrFail();
+        ->with('Images','seller')->firstOrFail();
 
 
 

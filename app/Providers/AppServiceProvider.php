@@ -10,6 +10,8 @@ use App\Repositories\admin\ProductRepository;
 use App\Repositories\admin\ProductRepositoryInterface;
 use App\Repositories\client\first_page\ClientFirstPageInterFace;
 use App\Repositories\client\first_page\ClientFirstPageRepository;
+use App\Repositories\client\product_page\ClientProductRepository;
+use App\Repositories\client\product_page\ClientProductRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider{
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider{
         $this->app->bind(AdminDeliveryRepositoryInterface::class, AdminDeliveryRepository::class);
         $this->app->bind(AdminPaymentRepositoryInterface::class, AdminPaymentRepository::class);
         $this->app->bind(ClientFirstPageInterFace::class, ClientFirstPageRepository::class);
+        $this->app->bind(ClientProductRepositoryInterface::class, ClientProductRepository::class);
     }
 
     /**

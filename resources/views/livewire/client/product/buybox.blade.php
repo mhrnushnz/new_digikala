@@ -19,7 +19,7 @@
             </svg>
             <div>
                 <div class="d-flex my-3">
-                    <p>پرشین مارکت</p>
+                    <p>{{$seller}}</p>
                     <p class="text-success fs-8 fw-medium pe-3">منتخب</p>
                 </div>
                 <div class="d-flex gap-3 justify-content-center fs-8">

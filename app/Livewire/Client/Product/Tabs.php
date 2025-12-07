@@ -2,6 +2,7 @@
 namespace App\Livewire\Client\Product;
 use App\Models\Product;
 use App\Models\ProductReviews;
+use App\Models\ProductReviewVote;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -49,7 +50,7 @@ class Tabs extends Component{
             'positive' => implode(',', $this->positiveItems),
             'negative' => implode(',', $this->negativeItems),
             'product_id' => $this->productId,
-            'user_id' => 1
+            'user_id' => 2
         ]);
 
         $this->submitSuccessAlert = true;
@@ -60,46 +61,28 @@ class Tabs extends Component{
     }
 
 
+    public function removeItem($type, $index){
 
-    public function removeNegativeItem($index){
-        array_splice($this->negativeItems, $index, 1);
+        $typeItem = $type === 'positive'? 'positiveItems' : 'negativeItems';
+        array_splice($this->{$typeItem} , $index, 1);
     }
 
 
+    public function addItem($type){
 
-    public function removePositiveItem($index){
-        array_splice($this->positiveItems, $index, 1);
-    }
+        $inputField = $type === 'positive' ? 'positiveInput' : 'negativeInput';
+        $itemField = $type === 'positive' ? 'positiveItems' : 'negativeItems';
 
-
-
-    public function addPositiveItem(){
         $this->validate([
-            'positiveInput' => 'required|min:3|max:50',
+            $inputField => 'required|min:3|max:50',
         ],
-        [
-            'positiveInput.required'=>'پر کردن فیلد الزامی است',
-            'positiveInput.min' => 'حداقل باید 3 کاراکتر باشد',
-            'positiveInput.max' => 'حداکثر باید 50 کاراکتر باشد',
-        ]);
-        $this->positiveItems[] = $this->positiveInput;
-        $this->positiveInput = '';
-    }
-
-
-    public function addNegativeItem(){
-        $this->validate([
-            'negativeInput' => 'required|min:3|max:50',
-        ],
-        [
-            'negativeInput.required'=>'پر کردن فیلد الزامی است',
-            'negativeInput.min' => 'حداقل باید 3 کاراکتر باشد',
-            'negativeInput.max' => 'حداکثر باید 50 کاراکتر باشد',
-        ]
-        );
-        $this->negativeItems[] = $this->negativeInput;
-        $this->negativeInput = '';
-        return response()->json($this->negativeItems);
+            [
+                $inputField.'required'=>'پر کردن فیلد الزامی است',
+                $inputField.'min' => 'حداقل باید 3 کاراکتر باشد',
+                $inputField.'max' => 'حداکثر باید 50 کاراکتر باشد',
+            ]);
+        $this->{$itemField}[] = $this->{$inputField};
+        $this->{$inputField} = '';
     }
 
 
@@ -133,13 +116,35 @@ class Tabs extends Component{
     }
 
 
-
     public function getProductReviews($productId){
-        $this->productReviews = ProductReviews::query()->where(['product_id' => $productId , 'status' => 'approved'])->with('user')->get();
+        $this->productReviews = ProductReviews::query()->where(['product_id' => $productId , 'status' => 'approved'])
+            ->with('user')
+            ->withCount(['vote as likeCount' => function($query){       //این کوئری تو ریلشن ها شمارش میکنه
+                $query->where('status', 'like');
+            },
+                'vote as dislikeCount' => function($query){
+                    $query->where('status', 'dislike');
+                }])
+            ->get();
     }
 
 
+    public function setVote($status, $reviewId){
+        if(Auth::check()){
+            ProductReviewVote::query()->updateOrCreate([
+                'user_id' => 2,
+                'product_review_id' => $reviewId
+            ],[
+                'status' => $status,
+            ]);
 
+
+            $this->getProductReviews($this->productId);
+        }else{
+            return redirect()->route('client.auth.logout');
+        }
+
+    }
 
 
     public function render(){

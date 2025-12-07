@@ -58,7 +58,7 @@
             <!-- === Title & Details === -->
             <livewire:client.product.details :name="$products->name" />
             <!-- === Seller Detail === -->
-            <livewire:client.product.buybox :productId="$products->id"  :price="$products->price" :discount="$products->discount" :finalprice="$products->finalprice"/>
+            <livewire:client.product.buybox :seller="$products->seller->name" :productId="$products->id"  :price="$products->price" :discount="$products->discount" :finalprice="$products->finalprice"/>
         </section>
 
 
