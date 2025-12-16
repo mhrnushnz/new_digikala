@@ -34,7 +34,7 @@ class ProductRepository implements ProductRepositoryInterface{
         ProductImage::query()->where('product_id', $productId)->update(['is_cover' => false]);
 
         foreach ($images as $index => $image) {
-            $path = $image->store("product/$productId", 'public');
+            $path = $image->store("product/" . $productId . '/public');
 
             ProductImage::query()->create([
                 'path' => $path,

@@ -1,26 +1,27 @@
 <?php
-use App\Livewire\Admin\Category\Features;
-use App\Livewire\Admin\Category\FeatureValue;
 use App\Livewire\Admin\Category\Index as CategoryIndex;
 use App\Livewire\Admin\City\Index as CityIndex;
 use App\Livewire\Admin\Country\Index as CountryIndex;
 use App\Livewire\Admin\Dashboard\Index as DashboardIndex;
 use App\Livewire\Admin\Delivery\Index as DeliveryIndex;
 use App\Livewire\Admin\Payment\Index as IndexPayment;
-use App\Livewire\Admin\Product\CkUpload;
-use App\Livewire\Admin\Product\Content;
-use App\Livewire\Admin\Product\Create;
 use App\Livewire\Admin\Product\Features as ProductFeatures;
-use App\Livewire\Admin\Product\Index;
 use App\Livewire\Admin\State\Index as StateIndex;
 use App\Livewire\Admin\Story\Index as StoryIndex;
 use App\Livewire\Admin\slider\Index as SliderIndex;
-
+use App\Livewire\Admin\Category\Features;
+use App\Livewire\Admin\Category\FeatureValue;
+use App\Livewire\Admin\Product\CkUpload;
+use App\Livewire\Admin\Product\Content;
+use App\Livewire\Admin\Product\Create;
+use App\Livewire\Admin\Product\Index;
 
 use App\Livewire\Client\Auth\Index as ClientIndex;
 use App\Livewire\Client\Home\Home as ClientHome;
 use App\Livewire\Client\Product\Index as ClientProduct;
+use App\Livewire\Client\Cart\Index as CartIndex;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Client\Shipping\Index as ShippingIndex;
 
 
 // Admin routes
@@ -42,14 +43,31 @@ Route::get('/story', StoryIndex::class)->name('admin.story.index');
 Route::get('/slider', SliderIndex::class)->name('admin.slider.index');
 
 
-//client
 
+//client--------------------------------------------------------------------------------------------------------------------------------
 
+//بعضی از صفحات مهم نیست که کاربر لاگین کرده یا نه برای همین هیچی بهشون نمیدیم
 Route::get('/', ClientHome::class)->name('home');
-Route::get('/auth', ClientIndex::class)->name('client.auth.index');
-Route::get('/logout', [ClientIndex::class,'clientLogout'])->name('client.auth.logout');
-Route::get('/auth/gmail', [ClientIndex::class, 'redirectToProvider'])->name('gmail');
-Route::get('/auth/gmail/callback', [ClientIndex::class, 'handelProviderCallback'])->name('callback');
 Route::get('/client/product/{p_code?}/{slug?}', ClientProduct::class)->name('client.product.index');
 
+
+//صفحه هایی که کاربر به صورت مهمان(بدون لاگین کردن) دست رسی داره
+//میدلور گست (مهمان) ینی کاربر بدون لاگین کردن میتونه اون صفحه هارو ببینه و نیازی به لاگین کردنش نیست
+Route::middleware('guest')->group(function () {
+    Route::get('/auth', ClientIndex::class)->name('client.auth.index');         //زمانی که کاربر لاگین کرد به صورت مهمان دیگه صفحه ورود نمایش داده نشه بلکه صفحه اصلی بیاد
+    Route::get('/auth/gmail', [ClientIndex::class, 'redirectToProvider'])->name('gmail');         //زمانی که کاربر لاگین کرد به صورت مهمان دیگه صفحه ورود نمایش داده نشه بلکه صفحه اصلی بیاد
+    Route::get('/auth/gmail/callback', [ClientIndex::class, 'handelProviderCallback'])->name('callback');         //زمانی که کاربر لاگین کرد به صورت مهمان دیگه صفحه ورود نمایش داده نشه بلکه صفحه اصلی بیاد
+});
+
+
+
+//صفحه هایی که کاربر نیاز به لاگین کردن داره
+//صفحه پرووفایل و صفحه سبد خرید اطلاعات رو بر اساس user_id برمیگردونه!برای همین بهشون middleware auth رو اعمال میکنیم ینی حتما کاربر باید لاگین کنه
+// تا بتونه اون صفحه هارو ببینه و میدلور آس خودش به صورتت پیش فرض جوری تنظیم شده که بره صفحه ورود رو اجرا کنه ینی نیاز نیستت تو فایل app.php بریم کد کاستوم بزنیم
+Route::middleware('auth' )->group(function () {
+    Route::get('/logout', [ClientIndex::class,'clientLogout'])->name('client.auth.logout');
+});
+
+Route::get('/checkout/cart', CartIndex::class)->name('client.cart.index');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
+Route::get('/client/shipping', ShippingIndex::class)->name('client.shipping.index');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
 

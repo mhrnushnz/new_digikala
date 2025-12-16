@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <!-- login & cart -->
+            <!-- login & Cart -->
             <div class="col-lg-4 d-none d-lg-flex justify-content-end align-items-center">
 
                 <a href="{{ route('client.auth.index') }}" class="d-flex align-items-center gap-2 text-black fs-8 border border-secondary-subtle rounded px-3 py-2">

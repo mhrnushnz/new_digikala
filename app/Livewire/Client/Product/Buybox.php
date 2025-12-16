@@ -8,7 +8,6 @@ use Livewire\Component;
 class Buybox extends Component{
     public $price;
     public $discount;
-    public $finalprice;
     public $productId;
     public $inCart = false;
     public $seller;

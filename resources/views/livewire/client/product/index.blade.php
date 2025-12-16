@@ -63,8 +63,9 @@
 
 
         <!-- ====== Product Options ====== -->
+
         <section class="container my-lg-5 mx-auto d-flex align-items-center justify-content-center gap-md-5 options">
-            <a href="#" class="text-secondary d-flex flex-wrap align-items-center justify-content-center gap-2">
+            <a href="{{ route('client.shipping.index') }}" class="text-secondary d-flex flex-wrap align-items-center justify-content-center gap-2">
                 <img src="/client/assets/Product/express-delivery.svg" alt="express-delivery" />
                 <p class="fs-8">امکان تحویل اکسپرس</p>
             </a>

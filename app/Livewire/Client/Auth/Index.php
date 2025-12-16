@@ -1,6 +1,5 @@
 <?php
 namespace App\Livewire\Client\Auth;
-use App\Repositories\client\ClientAuthRepository;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Livewire\Component;

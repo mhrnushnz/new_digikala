@@ -61,7 +61,7 @@
                     <p class="text-secondary fs-8"><s>{{ $price }}</s></p>
                     <span class="bg-danger text-white fs-8 px-2 py-1 rounded-5">{{ $discount }}%</span>
                 </div>
-                <p class="fw-bold mt-3">{{ $finalprice }} <span class="fs-8">تومان</span></p>
+                <p class="fw-bold mt-3">{{ @$finalprice }} <span class="fs-8">تومان</span></p>
             </div>
         </div>
 
@@ -76,9 +76,9 @@
         <!-- buy btn -->
         @if(\Illuminate\Support\Facades\Auth::check())
             @if(!$inCart)
-                <button wire:click="addToCart" class="d-none d-lg-block bg-danger w-100 rounded-2 border-0 mt-3 py-3 text-center text-white fs-8">
+                <a href="{{route('client.cart.index')}}" wire:click="addToCart" class="d-none d-lg-block bg-danger w-100 rounded-2 border-0 mt-3 py-3 text-center text-white fs-8">
                     افزودن به سبد خرید
-                </button>
+                </a>
             @else
                 <button class="d-none d-lg-block bg-info w-100 rounded-2 border-0 mt-3 py-3 text-center text-white fs-8">
                     موجود در سبد خرید
