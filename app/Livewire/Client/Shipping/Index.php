@@ -22,10 +22,10 @@ class Index extends Component{
     public $number ='';
     public $postalCode ='';
 
-    public $totalProductCount;
-    public $totalOrginalPrice;
-    public $totalDiscount;
-    public $totalDiscountedPrice;
+    public $totalProductCount = 0;
+    public $totalOrginalPrice = 0;
+    public $totalDiscount = 0;
+    public $totalDiscountedPrice = 0;
 
 
 

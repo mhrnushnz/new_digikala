@@ -59,6 +59,7 @@ class Index extends Component
                 $discountPrice = $originalPrice - $discountAmount;
 
 
+
                 $this->originalPrice = $originalPrice;
                 $this->discountAmount = $discountAmount;
                 $this->discountPrice = $discountPrice;
