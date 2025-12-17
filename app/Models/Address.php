@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Address extends Model
 {
+    protected $guarded = [];
     use SoftDeletes;
 }

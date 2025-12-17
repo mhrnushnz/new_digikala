@@ -2,6 +2,9 @@
 .shipping-right {
     width: 75%;
 }
+.validation-error {
+    color: red;
+}
 
 .shipping-top {
     position: relative;
