@@ -50,7 +50,7 @@
                    نحوه ارسال :
                 </span>
                     @foreach($deliveries as  $item)
-                        <div class="shipping-type__item d-flex align-items-center {{$loop->first ? 'active' : ''}}">
+                        <div class="shipping-type__item d-flex align-items-center {{$loop->first ? 'active' : ''}}" wire:click="changeDeliveryPrice({{ $item->id }})">
                             <i class="fa fa-truck ml-3"></i>
                             <div class="">{{ $item->name }}
                                 <span class="shipping-type__price">{{$item->price}}تومان</span>
@@ -62,23 +62,41 @@
             </div>
 
 
-
             <div class="shipping-left">
                 <div class="final-invoice">
-                    <form class="discount-code mb-3">
+                    <form wire:submit.prevent="checkDiscountCode" class="discount-code mb-3">
                         <span class="mb-1 d-block">کد تحفیف</span>
                         <div class=" d-flex justify-content-between">
-                            <input type="text" name="code">
+                            <input wire:model="code" type="text" name="code">
                             <button>ثبت</button>
                         </div>
+                        @error('code')
+                        <div class="validation-error">{{ $message }}</div>
+                        @enderror
+
+
+
+                        @if(session()->has('success'))
+                            <div class="validation-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('error'))
+                            <div class="validation-error">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+
 
                     </form>
                     <div class="d-flex align-items-center mb-3 justify-content-between">
                         <span>
-                            قیمت کالاها (۱)
+                            قیمت کالاها {{number_format($totalProductCount)}}
                         </span>
                         <span>
-                            ۱,۶۵۶,۰۰۰
+                            {{number_format($totalOrginalPrice)}}
                             تومان
 
                         </span>
@@ -88,7 +106,7 @@
                         هزینه ارسال
                         </span>
                         <span>
-                            ۵۹,۰۰۰
+                            {{number_format($deliveryPrice)}}
                             تومان
 
                         </span>
@@ -100,9 +118,7 @@
 
                         </span>
                         <span>
-                           (۵٪)
-۱۵۶,۰۰۰
-
+                            {{number_format($totalDiscount)}}
                             تومان
 
                         </span>
@@ -113,12 +129,12 @@
 
                         </span>
                         <span>
-                            ۱,۷۱۵,۰۰۰
+                            {{number_format($totalAmount)}}
                             تومان
 
                         </span>
                     </div>
-                    <button class="addToBasket-btn w-100 p-2 fs-6 mt-2">
+                    <button wire:click="submitOrder" class="addToBasket-btn w-100 p-2 fs-6 mt-2">
                         ثبت سفارش
                     </button>
                 </div>

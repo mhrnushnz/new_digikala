@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/client/assets-v2/css/fontawesome.css" />
     <link rel="stylesheet" href="/client/assets-v2/css/main.css" />
     @stack('link')
+    @livewireStyles
 </head>
 <body>
 <!-- Header -->
@@ -346,5 +347,7 @@
     </div>
 </footer>
 @stack('script')
+@livewireScripts
+
 </body>
 </html>

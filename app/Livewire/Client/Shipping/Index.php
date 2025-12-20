@@ -2,18 +2,24 @@
 namespace App\Livewire\Client\Shipping;
 use App\Models\Address;
 use App\Models\City;
+use App\Models\Coupon;
 use App\Models\DeliveryMethod;
 use App\Models\State;
+use App\Traits\PaymentGetWay;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 
 class Index extends Component{
+    use PaymentGetWay;
+
+
     public $deliveries =[];
     public $addressList = [];
     public $cities = [];
     public $getProvinces = [];
-    public $addressId = 0;
+
 
 
     public $city ='';
@@ -21,13 +27,16 @@ class Index extends Component{
     public $address ='';
     public $number ='';
     public $postalCode ='';
+    public $code = '';
 
+    public $addressId = 0;
     public $totalProductCount = 0;
     public $totalOrginalPrice = 0;
     public $totalDiscount = 0;
     public $totalDiscountedPrice = 0;
-
-
+    public $discountCodeAmount = 0;
+    public $deliveryPrice = 0;
+    public $totalAmount = 0;
 
 
 
@@ -46,7 +55,27 @@ class Index extends Component{
         $this->getProvinces = State::all();
         $this->cities = City::all(); // خالی ولی امن
         $this->deliveries = DeliveryMethod::all();
+
+        $this->deliveryPrice = $this->deliveries->first()->price;
+        $this->totalAmountForPayment($this->totalDiscountedPrice, $this->deliveryPrice , $this->discountCodeAmount);
     }
+
+
+
+    public function totalAmountForPayment($totalDiscountedPrice, $deliveryPrice, $discountCodeAmount){
+        $this->totalAmount = ($totalDiscountedPrice + $deliveryPrice) - $discountCodeAmount;
+
+    }
+
+
+
+    public function changeDeliveryPrice($deliveryId){
+        $newDeliveryPrice = $this->deliveryPrice = DeliveryMethod::query()->where('id', $deliveryId)->pluck('price')->first();
+        $this->totalAmountForPayment($this->totalDiscountedPrice, $newDeliveryPrice , $this->discountCodeAmount);
+
+    }
+
+
 
 
     public function submitAddress()
@@ -80,7 +109,7 @@ class Index extends Component{
 
 
         // بعد از ثبت موفق
-        $this->reset(['address', 'state_id', 'city_id', 'postal_code']);
+        $this->reset(['address', 'province', 'city_id', 'postal_code']);
 
     }
 
@@ -105,7 +134,10 @@ class Index extends Component{
         if($type == 'add'){
             $this->reset();
         }
-        $this->getProvinces = State::all();
+        else{
+            $this->getProvinces = State::all();
+        }
+
     }
 
 
@@ -114,6 +146,58 @@ class Index extends Component{
     {
         $this->addressList = Address::query()->where('user_id' , '=', 2)->latest()->get();
         $this->cities = City::query()->where('state_id', $value)->get();
+    }
+
+
+
+    public function checkDiscountCode()
+    {
+        $validatedData =  $this->validate([
+            'code' => 'required|string|max:6|min:4|exists:coupons,code',
+            ],[
+            //نوشتن ارور های دیگر و سفارشی
+            '*.required' => 'پر کردن فیلد الزامی است',
+            '*.string' => 'فرمت کد اشتباه است',                                   //این ولیدیشن از فرممون میاد!
+            '*.max' => ' حداکثر تعداد کاراکتر ها 6 می باشد',
+            '*.min' => ' حداقل تعداد کاراکتر ها 4 می باشد',
+            'code.exists' => 'کد نامعتبر است!',
+            //
+        ]);
+        // بعد از ثبت موفق
+        $this->reset('code');
+
+        $code = Coupon::query()->where('code', $validatedData['code'])->first();
+        $this->applyDiscount($code);
+
+    }
+
+
+
+    public function applyDiscount($code)
+    {
+        if (!$code->is_active || Carbon::parse($code->expires_at)->isPast()) {
+            session()->flash('error', 'این کد تخفیف معتبر نیست منقضی شده است');
+            return;
+        }
+
+
+        if (($this->totalAmount < $code->min_purchase) || $code->limit < 0) {
+            session()->flash('error', 'شرایط استفاده از این کد تخفیف برقرار نیست');
+            return;
+        }
+
+
+        $this->discountCodeAmount = $discount = $code->type == 'precent' ? ($this->totalDiscountedPrice * $code->value) / 100 : $code->value; ;
+        $this->totalAmountForPayment($this->totalDiscountedPrice, $this->deliveryPrice, $discount);
+        session()->flash('success', 'کد تخفیف با موفقیت فعال شد');
+
+    }
+
+
+
+    public function submitOrder()
+    {
+        $this->zibalRequest($this->totalAmount);
     }
 
 

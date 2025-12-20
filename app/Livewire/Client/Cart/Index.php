@@ -76,7 +76,7 @@ class Index extends Component
         ];
 
 
-         Session::put('inVoiceFormCart', $this->inVoice);
+         Session::put('inVoiceFormCart', $invoice = $this->inVoice );
 
 
 

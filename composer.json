@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
         "orangehill/iseed": "^3.1",
-        "spatie/image": "^3.8"
+        "spatie/image": "^3.8",
+        "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
