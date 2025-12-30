@@ -28,8 +28,7 @@ trait PaymentGetWay
             dd('پاسخی از زیبال دریافت نشد');
         }
         else{
-            echo "errorCode: ".$response->result."<br>";
-            echo "message: ".$response->message;
+            throw new \Exception('Error Code: '.$response->result . ' -Message: '.$response->message);
         }
     }
 }
