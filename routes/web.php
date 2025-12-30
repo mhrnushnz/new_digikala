@@ -18,12 +18,11 @@ use App\Livewire\Admin\Product\Index;
 
 use App\Livewire\Client\Auth\Index as ClientIndex;
 use App\Livewire\Client\Home\Home as ClientHome;
-use App\Livewire\Client\Payment\Index as PaymentIndex;
+use App\Livewire\Client\Payment\Callback as PaymentCallback;
 use App\Livewire\Client\Product\Index as ClientProduct;
 use App\Livewire\Client\Cart\Index as CartIndex;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Client\Shipping\Index as ShippingIndex;
-
 
 // Admin routes
 Route::get('/dashboard', DashboardIndex::class)->name('admin.dashboard.index');
@@ -73,5 +72,5 @@ Route::get('/checkout/cart', CartIndex::class)->name('client.cart.index');      
 Route::get('/client/shipping', ShippingIndex::class)->name('client.shipping.index');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
 
 
-Route::get('/client/paymentCallback', PaymentIndex::class)->name('client.payment.callback');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
+Route::get('/client/payment/callback', PaymentCallback::class)->name('client.payment.callback');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
 

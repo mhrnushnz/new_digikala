@@ -4,8 +4,9 @@ namespace App\Classes;
 class Zibal{
     function postToZibal($path, $parameters)
     {
-        $url = 'https://gateway.zibal.ir/v1/'.$path;       //$path همون trackId هست
-        $ch = curl_init();
+        $url = 'https://gateway.zibal.ir/v1/'.$path;
+        $ch = curl_init($url);
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POST, 1);

@@ -6,27 +6,30 @@ trait PaymentGetWay
 {
     protected function zibalRequest($amount)
     {
-        $zibal = new Zibal();          //ساختن شی از کلاس زیبال
+        $zibal = new Zibal();
 
         $parameters = array(
-            "merchant"=> 'zibal',                //required
-            "callbackUrl"=> route('client.payment.callback'),       //required
-            "amount"=> $amount,                  //required
-            "orderId"=> time(),                  //optional
-            "mobile"=> "09120000000",            //optional for mpg
+            "merchant"=> 'zibal',//required
+            "callbackUrl"=> route('client.payment.callback'),//required
+            "amount"=> $amount * 10,//required
+
+            "orderId"=> time(),//optional
+            "mobile"=> "09120000000",//optional for mpg
         );
 
         $response = $zibal->postToZibal('request', $parameters);
-
-        var_dump($response);
-
-
-        if ($response->result == 100) {
+        if ($response->result == 100)
+        {
             $startGateWayUrl = "https://gateway.zibal.ir/start/".$response->trackId;
-            return redirect($startGateWayUrl);
+            return redirect()->away($startGateWayUrl);
+        }
+
+        if (!$response) {
+            dd('پاسخی از زیبال دریافت نشد');
         }
         else{
-            throw new \Exception('Error code: '.$response->result . '-Message:' . $response->message);       //مدیریت خطا
+            echo "errorCode: ".$response->result."<br>";
+            echo "message: ".$response->message;
         }
     }
 }

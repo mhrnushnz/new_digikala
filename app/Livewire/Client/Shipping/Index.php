@@ -14,7 +14,6 @@ use Livewire\Component;
 class Index extends Component{
     use PaymentGetWay;
 
-
     public $deliveries =[];
     public $addressList = [];
     public $cities = [];
@@ -137,7 +136,6 @@ class Index extends Component{
         else{
             $this->getProvinces = State::all();
         }
-
     }
 
 
