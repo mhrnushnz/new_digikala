@@ -1,7 +1,6 @@
 <?php
 namespace App\Livewire\Client\Product;
 use App\Models\Product;
-use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class Index extends Component{

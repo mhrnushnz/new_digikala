@@ -12,6 +12,7 @@ use App\Repositories\client\first_page\ClientFirstPageInterFace;
 use App\Repositories\client\first_page\ClientFirstPageRepository;
 use App\Repositories\client\product_page\ClientProductRepository;
 use App\Repositories\client\product_page\ClientProductRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider{
@@ -31,6 +32,6 @@ class AppServiceProvider extends ServiceProvider{
       Bootstrap any application services.
      */
     public function boot(): void{
-        //
+        Carbon::setLocale('fa');
     }
 }

@@ -15,6 +15,8 @@ use App\Livewire\Admin\Product\CkUpload;
 use App\Livewire\Admin\Product\Content;
 use App\Livewire\Admin\Product\Create;
 use App\Livewire\Admin\Product\Index;
+use App\Livewire\Admin\Order\Index as orderIndex;
+use App\Livewire\Admin\Order\Details as orderDetails;
 
 use App\Livewire\Client\Auth\Index as ClientIndex;
 use App\Livewire\Client\Home\Home as ClientHome;
@@ -41,8 +43,8 @@ Route::get('/delivery/index', DeliveryIndex::class)->name('admin.delivery.index'
 Route::get('/payment/index', IndexPayment::class)->name('admin.payment.index');
 Route::get('/story', StoryIndex::class)->name('admin.story.index');
 Route::get('/slider', SliderIndex::class)->name('admin.slider.index');
-
-
+Route::get('/order', orderIndex::class)->name('admin.order.index');
+Route::get('/order/{orderId}', orderDetails::class)->name('admin.order.details');
 
 //client--------------------------------------------------------------------------------------------------------------------------------
 

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use SoftDeletes;
+    protected $guarded = [];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
