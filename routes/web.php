@@ -44,7 +44,7 @@ Route::get('/payment/index', IndexPayment::class)->name('admin.payment.index');
 Route::get('/story', StoryIndex::class)->name('admin.story.index');
 Route::get('/slider', SliderIndex::class)->name('admin.slider.index');
 Route::get('/order', orderIndex::class)->name('admin.order.index');
-Route::get('/order/{orderId}', orderDetails::class)->name('admin.order.details');
+Route::get('/order/{order}', orderDetails::class)->name('admin.order.details');
 
 //client--------------------------------------------------------------------------------------------------------------------------------
 
@@ -72,7 +72,5 @@ Route::middleware('auth' )->group(function () {
 
 Route::get('/checkout/cart', CartIndex::class)->name('client.cart.index');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
 Route::get('/client/shipping', ShippingIndex::class)->name('client.shipping.index');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
-
-
 Route::get('/client/payment/callback', PaymentCallback::class)->name('client.payment.callback');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
 

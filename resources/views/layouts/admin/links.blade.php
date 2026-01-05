@@ -24,3 +24,8 @@
 <!-- END GLOBAL MANDATORY STYLES -->
 
 
+
+{{----}}
+@stack('link')
+{{----}}
+

@@ -60,3 +60,6 @@
 
 @stack('script')
 
+
+@stack('script_order')
+
