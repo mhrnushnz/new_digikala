@@ -17,6 +17,8 @@ use App\Livewire\Admin\Product\Create;
 use App\Livewire\Admin\Product\Index;
 use App\Livewire\Admin\Order\Index as orderIndex;
 use App\Livewire\Admin\Order\Details as orderDetails;
+use App\Livewire\Admin\Transaction\Index as transactionIndex;
+
 
 use App\Livewire\Client\Auth\Index as ClientIndex;
 use App\Livewire\Client\Home\Home as ClientHome;
@@ -45,6 +47,7 @@ Route::get('/story', StoryIndex::class)->name('admin.story.index');
 Route::get('/slider', SliderIndex::class)->name('admin.slider.index');
 Route::get('/order', orderIndex::class)->name('admin.order.index');
 Route::get('/order/{order}', orderDetails::class)->name('admin.order.details');
+Route::get('/transaction', transactionIndex::class)->name('admin.transaction.index');
 
 //client--------------------------------------------------------------------------------------------------------------------------------
 

@@ -6,6 +6,7 @@ use App\Models\Coupon;
 use App\Models\DeliveryMethod;
 use App\Models\State;
 use App\Traits\PaymentGetWay;
+use Artesaos\SEOTools\Traits\SEOTools;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
@@ -13,6 +14,7 @@ use Livewire\Component;
 
 class Index extends Component{
     use PaymentGetWay;
+    use SEOTools;
 
     public $deliveries =[];
     public $addressList = [];
@@ -40,7 +42,7 @@ class Index extends Component{
 
 
     public function mount(){
-
+        $this->seoConfig();
         if (Session::get('inVoiceFormCart')) {
             $this->deliveries = Session::get('inVoiceFormCart');
             $this->totalProductCount = $invoice['totalProductCount'];
@@ -57,6 +59,16 @@ class Index extends Component{
 
         $this->deliveryPrice = $this->deliveries->first()->price;
         $this->totalAmountForPayment($this->totalDiscountedPrice, $this->deliveryPrice , $this->discountCodeAmount);
+
+    }
+
+
+
+    public function seoConfig()
+    {
+        $this->seo()
+            ->setTitle('جزئیات ارسال سفارش')
+            ->setDescription('هر آنچه که نیاز دارید با بهترین قیمت خرید کنید!-کلیک کنید!');
     }
 
 

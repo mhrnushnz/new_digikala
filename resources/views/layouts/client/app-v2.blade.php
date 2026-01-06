@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Digikala-cart</title>
+    {!! SEO::generate() !!}
     <link rel="stylesheet" href="/client/assets-v2/css/fontawesome.css" />
     <link rel="stylesheet" href="/client/assets-v2/css/main.css" />
     @stack('link')
     @livewireStyles
+
 </head>
 <body>
 <!-- Header -->

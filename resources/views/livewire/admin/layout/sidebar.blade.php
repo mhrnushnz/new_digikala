@@ -81,71 +81,24 @@
 
 
                 <li class="menu">
-                    <a href="#elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
+                    <a href="{{ route('admin.order.index') }}?status=all" aria-expanded="false" class="dropdown-toggle">
+                        <div class="flex gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                             <span>سفارشات</span>
                         </div>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </div>
                     </a>
-                    <ul class="collapse submenu list-unstyled" id="elements" data-parent="#accordionExample">
-                        <li>
-                            <a href="element_alerts.html"> هشدارها </a>
-                        </li>
-                        <li>
-                            <a href="element_avatar.html"> آواتار </a>
-                        </li>
-                        <li>
-                            <a href="element_badges.html"> نشانها </a>
-                        </li>
-                        <li>
-                            <a href="element_breadcrumbs.html"> نشانگر موقعیت </a>
-                        </li>
-                        <li>
-                            <a href="element_buttons.html"> دکمه ها </a>
-                        </li>
-                        <li>
-                            <a href="element_buttons_group.html"> گروه های دکمه ای </a>
-                        </li>
-                        <li>
-                            <a href="element_color_library.html"> کتابخانه رنگ </a>
-                        </li>
-                        <li>
-                            <a href="element_dropdown.html"> کشویی </a>
-                        </li>
-                        <li>
-                            <a href="element_infobox.html"> جعبه اطلاعات </a>
-                        </li>
-                        <li>
-                            <a href="element_jumbotron.html"> جومبوترن </a>
-                        </li>
-                        <li>
-                            <a href="element_loader.html"> لودر </a>
-                        </li>
-                        <li>
-                            <a href="element_pagination.html"> صفحه </a>
-                        </li>
-                        <li>
-                            <a href="element_popovers.html"> توضیحات </a>
-                        </li>
-                        <li>
-                            <a href="element_progress_bar.html"> نوار پیشرفت </a>
-                        </li>
-                        <li>
-                            <a href="element_search.html"> جستجو </a>
-                        </li>
-                        <li>
-                            <a href="element_tooltips.html"> نکات راهنمایی </a>
-                        </li>
-                        <li>
-                            <a href="element_treeview.html"> نمای درختی </a>
-                        </li>
-                        <li>
-                            <a href="element_typography.html"> تایپوگرافی </a>
-                        </li>
-                    </ul>
+                    <a href="{{ route('admin.order.index') }}?status=pending" aria-expanded="false" class="dropdown-toggle">
+                        pending
+                    </a>
+                    <a href="{{ route('admin.order.index') }}?status=processing" aria-expanded="false" class="dropdown-toggle">
+                        processing
+                    </a>
+                    <a href="{{ route('admin.order.index') }}?status=completed" aria-expanded="false" class="dropdown-toggle">
+                        completed
+                    </a>
+                    <a href="{{ route('admin.order.index') }}?status=cancel" aria-expanded="false" class="dropdown-toggle">
+                        cancel
+                    </a>
                 </li>
 
                 <li class="menu">
@@ -155,14 +108,21 @@
                             <span>کاربران</span>
                         </div>
                     </a>
+
                 </li>
 
                 <li class="menu">
-                    <a href="widgets.html" aria-expanded="false" class="dropdown-toggle">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                    <a href="{{ route('admin.transaction.index') }}?status=all" aria-expanded="false" class="dropdown-toggle">
+                        <div class="flex gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                             <span>تراکنش ها</span>
                         </div>
+                    </a>
+                    <a href="{{ route('admin.transaction.index') }}?status=completed" aria-expanded="false" class="dropdown-toggle">
+                        موفق
+                    </a>
+                    <a href="{{ route('admin.transaction.index') }}?status=canceled" aria-expanded="false" class="dropdown-toggle">
+                        ناموفق
                     </a>
                 </li>
 

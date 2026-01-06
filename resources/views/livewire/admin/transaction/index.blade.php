@@ -34,36 +34,35 @@
             </thead>
 
             <tbody>
-            @foreach($orders as $order)
+            @foreach($transactions as $transaction)
                 <tr>
                     <td> {{ $loop->index + 1 }}  </td>
-                    <td> {{ $order->order_number}}  </td>
+                    <td> {{ $transaction->order_number}}  </td>
                     <td>
-                        {{jalali($order->created_at)->format('d m y | h:i')}}
-                        <br>
-                        {{$order->created_at->diffForHumans() }}
+                        {{jalali($transaction->created_at)->format('d m y | h:i')}}
+
                     </td>
                     <td>
-                        {{@$order->user->name}}
+                        {{@$transaction->user->name}}
                         <br>
-                        {{@$order->user->mobile}}
+                        {{@$transaction->user->mobile}}
                         <br>
-                        {{@$order->user->email}}
+                        {{@$transaction->user->email}}
                     </td>
-                    <td class="text-danger">{{number_format($order->amount)}}</td>
+                    <td class="text-danger">{{number_format($transaction->amount)}}</td>
                     <td class="text-center">
-                        <select class="form-control bg-{{$order->statusColor}}" wire:change="changeStatus({{$order->id}}, $event.target.value)">
-                            <option value="pending"  {{$order->status == 'pending'? 'selected' : ''}}>pending</option>
-                            <option value="processing " {{$order->status == 'processing'? 'selected' : ''}}>processing</option>
-                            <option value="completed"  {{$order->status == 'completed'? 'selected'  : ''}}>completed</option>
-                            <option value="cancel"  {{$order->status == 'cancel'? 'selected' : ''}}>cancel</option>
+                        <select class="form-control bg-{{$transaction->statusColor}}" wire:change="changeStatus({{$transaction->id}}, $event.target.value)">
+                            <option value="pending"  {{$transaction->status == 'pending'? 'selected' : ''}}>pending</option>
+                            <option value="processing " {{$transaction->status == 'processing'? 'selected' : ''}}>processing</option>
+                            <option value="completed"  {{$transaction->status == 'completed'? 'selected'  : ''}}>completed</option>
+                            <option value="cancel"  {{$transaction->status == 'cancel'? 'selected' : ''}}>cancel</option>
                         </select>
                     </td>
 
-                    <td><a class="bg-primary rounded-pill p-1 text-center" href="{{route('admin.order.details', $order->id) }}">جزئیات سفارش</a></td>
                 </tr>
             @endforeach
             </tbody>
         </table>
     </div>
 </div>
+

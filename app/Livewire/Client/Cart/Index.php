@@ -1,14 +1,31 @@
 <?php
 namespace App\Livewire\Client\Cart;
 use App\Models\Cart;
+use Artesaos\SEOTools\Traits\SEOTools;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class Index extends Component
 {
+    use SEOTools;
     public $cartItems = [];
     public $inVoice = [] ;
     public $outOfStock = false;
+
+
+
+
+    public function mount()
+    {
+        $this->seoConfig();
+    }
+
+    public function seoConfig()
+    {
+        $this->seo()
+            ->setTitle('سبد خرید شما')
+            ->setDescription('هر آنچه که نیاز دارید با بهترین قیمت خرید کنید!-کلیک کنید!');
+    }
 
 
 

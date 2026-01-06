@@ -1,9 +1,11 @@
 <?php
 namespace App\Livewire\Client\Product;
 use App\Models\Product;
+use Artesaos\SEOTools\Traits\SEOTools;
 use Livewire\Component;
 
 class Index extends Component{
+    use SEOTools;
     public $products;
 
 
@@ -11,7 +13,7 @@ class Index extends Component{
 
         $product = Product::query()->where('p_code', $p_code)
         ->select('id', 'name', 'p_code', 'price', 'discount', 'discount_duration','category_id', 'stock', 'seller_id','featured',)
-        ->with('Images','seller')->firstOrFail();
+        ->with('seo','seller')->firstOrFail();
 
 
 
@@ -20,10 +22,18 @@ class Index extends Component{
             $product->finalprice = $product->price - $discountAmount;
         }
         $this->products = $product;
+
+        $this->seoConfig($product->seo);
     }
 
 
 
+    public function seoConfig($productSeoItems)
+    {
+        $this->seo()
+            ->setTitle($productSeoItems->meta_title)
+            ->setDescription($productSeoItems->meta_description);
+    }
 
 
 

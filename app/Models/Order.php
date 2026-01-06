@@ -15,13 +15,18 @@ class Order extends Model
     }
 
 
-    public function paymentMethod(){
-        return $this->hasMany(Product::class);
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PeymentMethod::class);
     }
 
-
-    public function deliveryMethod(){
+    public function deliveryMethod()
+    {
         return $this->belongsTo(DeliveryMethod::class);
+    }
+
+    public function payment(){
+        return $this->belongsTo(Payment::class);
     }
 
 
@@ -29,9 +34,8 @@ class Order extends Model
         return $this->belongsTo(Address::class);
     }
 
-
     public function products(){
-        return $this->belongsTo(PeymentMethod::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function orderItems(){

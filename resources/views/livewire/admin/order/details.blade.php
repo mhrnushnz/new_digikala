@@ -26,7 +26,7 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                                                 </div>
                                                 <div class="f-body">
-                                                    <p class="invoice-number">فاکتور : #{{$orderDatalise->order_number}}</p>
+                                                    <p class="invoice-number">فاکتور : #{{@$orderDatalise->payment->order_number}}</p>
                                                     <p class="invoice-customer-name"><span>به :</span>{{$orderDatalise->user->name}}</p>
                                                     <p class="invoice-generated-date">تاریخ: 12 مهر 1399</p>
                                                 </div>
@@ -67,6 +67,9 @@
                                                 <div class="company-info">
                                                     <img  class="rounded-full w-1/6" src="https://tse1.mm.bing.net/th/id/OIP.jyS8nIednwP0f5AwhSAIVgAAAA?pid=Api&P=0&h=180" alt="">
                                                 </div>
+                                                <p class="inv-customer-name">تاریخ ثبت سفارش: {{jalali($orderDatalise->created_at)->format('d m y | h:i')}}</p>
+                                                <p class="inv-customer-name">تاریخ آخرین تغییر: {{jalali($orderDatalise->updated_at)->format('d m y | h:i')}}</p>
+
                                             </div>
 
                                         </div>
@@ -97,19 +100,27 @@
 
                                             <div class="col-sm-7 align-self-center">
                                                 <p class="inv-to">
-                                                    {{$orderDatalise->paymentMethod->name}}درگاه:</p>
+                                                    درگاه: {{@$orderDatalise->deliveryMethod->name}}</p>
                                             </div>
 
 
                                             <div class="col-sm-7 align-self-center">
-                                                <p class="inv-to">
-                                                    {{$orderDatalise->payment->status}}وضعیت پرداخت :</p>
+                                                <p class="inv-to text-white badge bg-{{$orderDatalise->statusPaymentColor}}">
+                                                    وضعیت پرداخت :{{@$orderDatalise->status}}</p>
                                             </div>
 
                                             <div class="col-sm-7 align-self-center">
                                                 <p class="inv-customer-name">{{$orderDatalise->user->name}}</p>
                                                 <p class="inv-street-addr">{{$orderDatalise->user->email}}</p>
                                                 <p class="inv-email-address">{{$orderDatalise->user->mobile}}</p>
+                                                <p class="inv-email-address">
+                                                    آدرس:
+                                                    {{$orderDatalise->address->country->name}},
+                                                    {{$orderDatalise->address->state->name}},
+                                                    {{$orderDatalise->address->address}},
+                                                </p>
+                                                <p class="inv-email-address">کدپستی: {{$orderDatalise->address->postal_code}}</p>
+                                                <p class="inv-email-address">شماره گیرنده: 0{{$orderDatalise->address->mobile}}</p>
                                             </div>
                                             <div class="col-sm-5 align-self-center  text-sm-right order-2">
                                                 <p class="inv-list-number"><span class="inv-title">شماره فاکتور:</span> <span class="inv-number">{{$orderDatalise->order_number}}</span></p>
@@ -175,7 +186,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-7 col-12 order-sm-1 order-0">
+                                            <div class="col-sm-7 flex flex-col justify-content-end col-12 order-sm-1 order-0">
                                                 <div class="inv--total-amounts text-sm-right">
                                                     <div class="row">
                                                         <div class="col-sm-8 col-7">
@@ -204,6 +215,15 @@
                                                             <p class="">{{number_format($orderDatalise->amount)}}تومان</p>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="">
+                                                    <p>تغییر وضعیت</p>
+                                                    <select class="form-control bg-{{$orderDatalise->statusColor}}" wire:change="changeStatus({{$order->id}}, $event.target.value)">
+                                                        <option value="pending"  {{$orderDatalise->status == 'pending'? 'selected' : ''}}>pending</option>
+                                                        <option value="processing " {{$orderDatalise->status == 'processing'? 'selected' : ''}}>processing</option>
+                                                        <option value="completed"  {{$orderDatalise->status == 'completed'? 'selected'  : ''}}>completed</option>
+                                                        <option value="cancel"  {{$orderDatalise->status == 'cancel'? 'selected' : ''}}>cancel</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>

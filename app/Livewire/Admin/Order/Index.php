@@ -51,7 +51,7 @@ class Index extends Component
 
     public function render()
     {
-        $orders = Order::query()->with( 'user', 'orderItems')->when($this->search, function ($query) {      //وقتی داریم$this->search رو پاس میدیم در کالبک فانکشن به صورت ورودی میشینه
+        $ordersQuery = Order::query()->with( 'user', 'orderItems')->when($this->search, function ($query) {      //وقتی داریم$this->search رو پاس میدیم در کالبک فانکشن به صورت ورودی میشینه
             $query->where('order_number', 'like', '%' . $this->search . '%')->
                 orWhereHas('user', function ($query) {
                     $query->where('name', 'like', '%' . $this->search . '%')
@@ -59,7 +59,15 @@ class Index extends Component
                     ->orWhere('email', 'like', '%' . $this->search . '%');
             });
 
-    })->latest()->paginate(10);
+    })->latest();
+
+        if(isset($_GET['status']) and $_GET['status'] != 'all'){
+            $ordersQuery->where('status','=', $_GET['status']);    //باید قبل از paginate شرط رو بنویسیم(فیلتر کردن بر اساس نوع استاتوس)
+        }
+
+
+
+    $orders = $ordersQuery->paginate(10);
 
 
 
