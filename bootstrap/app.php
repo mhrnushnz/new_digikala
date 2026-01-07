@@ -11,8 +11,23 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->redirectGuestsTo('/auth');        //زمانی که کاربر به صورت مهمان وارد شده بره به این صفحه ورودی نام صفحه نیست همون مسیری url عه
+        $middleware->redirectGuestsTo(function (){
+
+            $currentPath = request()->path();     //تشخیص گاردز
+
+            if(str_starts_with($currentPath, 'admin')){
+                return redirect()->route('admin.auth.index');
+            } elseif (str_starts_with($currentPath, 'seller')){
+                return redirect()->route('admin.auth.index');
+            }else{
+                return route('client.auth.index');
+            }
+
+        });        //زمانی که کاربر به صورت مهمان وارد شده بره به این صفحه ورودی نام صفحه نیست همون مسیری url عه
     })
+
+
+
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

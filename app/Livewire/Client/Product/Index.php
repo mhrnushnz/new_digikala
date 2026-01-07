@@ -5,7 +5,7 @@ use Artesaos\SEOTools\Traits\SEOTools;
 use Livewire\Component;
 
 class Index extends Component{
-    use SEOTools;
+    use SEOTools;                               //باید اینو فراخونی کنیم حتما
     public $products;
 
 
@@ -25,6 +25,7 @@ class Index extends Component{
 
         $this->seoConfig($product->seo);
     }
+
 
 
 

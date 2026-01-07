@@ -32,7 +32,7 @@
         <hr/>
 
         <div class="row mb-4">
-            <div class="col-6 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center gap-3">
                 <a  href="{{route('gmail')}}" class="d-flex align-content-center gap-3 py-2 px-3 btn btn-outline-secondary">
                     <p class="d-none d-md-block fs-7 fw-bold">ورود با</p>
                     <div>
@@ -41,6 +41,11 @@
                         </svg>
                     </div>
                 </a>
+
+                <a  href="{{route('admin.auth.index')}}" class=" d-flex align-content-center badge gap-3 py-2 px-3 btn btn-outline-secondary">
+                    <p class="text-black d-none d-md-block fs-7 fw-bold">ورود به عنوان ادمین</p>
+                </a>
+
             </div>
         </div>
 

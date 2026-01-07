@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -12,9 +13,9 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-
+    //برای تغییرات احراز هویت معمولا با دیفالت کاری نداریم
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
+        'guard' => env('AUTH_GUARD', 'web'),            //مثل ی نه بان تو دروازه شهره که بررسی میکنه ایا کاربر اجازه ورود داره یا ن
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
@@ -37,8 +38,16 @@ return [
 
     'guards' => [
         'web' => [
+            'driver' => 'session',            //این گاردز بر اساس سشن هست
+            'provider' => 'users',           //provider که روشون تاثیر میزاره کاربران هستن
+        ],
+        'admin' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'admins',
+        ],
+        'seller' => [
+            'driver' => 'session',
+            'provider' => 'sellers',
         ],
     ],
 
@@ -59,11 +68,22 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => [                //مشخص میکنه اطلاعات کاربران از کجا و چه جوری دریافت بشه
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => 'eloquent',                 //اطلاعات کاربران از درایورeloquent خوانده بشه میتونیم اینجا دیتا بیس هم بزاریم
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL_ADMIN', App\Models\Admin::class),   //ینی بره از مدل ادمین بخونه
+        ],
+
+        'sellers' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL_SELLER', App\Models\Seller::class),
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -90,9 +110,23 @@ return [
     |
     */
 
-    'passwords' => [
+    'passwords' => [             //برای پسورد
         'users' => [
-            'provider' => 'users',
+            'provider' => 'users',             //برای کاربران عه
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'), //تیبلی که باید بره و توکن های بازنشنانی رمز عبور ذخیره بشه password_reset_tokens این تیبل عه
+            'expire' => 60,          //مدت زمان اعتبار توکن برای بازنشنانی رمز عبور 60 دقیقه است
+            'throttle' => 60,        //تعداد ثانیه هایی که قبل از ایجاد توکن جدید باید منتظر بمونه
+        ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'sellers' => [
+            'provider' => 'sellers',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
@@ -110,6 +144,6 @@ return [
     |
     */
 
-    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),      //زمان انقضای تایید رمز عبور
 
 ];
