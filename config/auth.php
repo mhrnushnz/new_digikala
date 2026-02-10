@@ -15,7 +15,7 @@ return [
     */
     //برای تغییرات احراز هویت معمولا با دیفالت کاری نداریم
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),            //مثل ی نه بان تو دروازه شهره که بررسی میکنه ایا کاربر اجازه ورود داره یا ن
+        'guard' => env('AUTH_GUARD', 'web'),            //مثل ی نگهبان تو دروازه شهره که بررسی میکنه ایا کاربر اجازه ورود داره یا ن
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 
@@ -78,6 +78,7 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL_ADMIN', App\Models\Admin::class),   //ینی بره از مدل ادمین بخونه
         ],
+
 
         'sellers' => [
             'driver' => 'eloquent',

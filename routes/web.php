@@ -31,7 +31,8 @@ use App\Livewire\Client\Shipping\Index as ShippingIndex;
 
 
 // Admin routes
-Route::get('/auth/admin', authIndexAdmin::class)->name('admin.auth.index')->middleware('guest');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
+Route::get('/auth/admin', authIndexAdmin::class)->name('admin.auth.index')->middleware('guest:admin');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
+
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', DashboardIndex::class)->name('admin.dashboard.index');
     Route::get('/country', CountryIndex::class)->name('admin.country.index');
@@ -52,6 +53,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/order', orderIndex::class)->name('admin.order.index');
     Route::get('/order/{order}', orderDetails::class)->name('admin.order.details');
     Route::get('/transaction', transactionIndex::class)->name('admin.transaction.index');
+});
+
+
+Route::get('/sitemap.xml', function (){
+    return view('.sitemap')->name('sitemap');
 });
 
 //client--------------------------------------------------------------------------------------------------------------------------------
@@ -76,6 +82,8 @@ Route::middleware('guest')->group(function () {
 // تا بتونه اون صفحه هارو ببینه و میدلور آس خودش به صورتت پیش فرض جوری تنظیم شده که بره صفحه ورود رو اجرا کنه ینی نیاز نیستت تو فایل app.php بریم کد کاستوم بزنیم
 Route::middleware('auth' )->group(function () {
     Route::get('/logout', [ClientIndex::class,'clientLogout'])->name('client.auth.logout');
+
+
 });
 
 Route::get('/checkout/cart', CartIndex::class)->name('client.cart.index');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php

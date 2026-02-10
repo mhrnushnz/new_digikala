@@ -10,7 +10,7 @@ class Index extends Component{
 
 
     public function login(){
-        dd('این تابع اجرا میشه');
+
         $this->validate([
             'email_number' => 'required|min:5|max:50'
         ]);

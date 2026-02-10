@@ -13,6 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectGuestsTo(function (){
 
+
+
             $currentPath = request()->path();     //تشخیص گاردز
 
             if(str_starts_with($currentPath, 'admin')){

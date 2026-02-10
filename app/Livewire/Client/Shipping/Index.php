@@ -22,7 +22,6 @@ class Index extends Component{
     public $getProvinces = [];
 
 
-
     public $city ='';
     public $province ='';
     public $address ='';
@@ -30,26 +29,26 @@ class Index extends Component{
     public $postalCode ='';
     public $code = '';
 
-    public $addressId = 0;
-    public $totalProductCount = 0;
-    public $totalOrginalPrice = 0;
-    public $totalDiscount = 0;
-    public $totalDiscountedPrice = 0;
-    public $discountCodeAmount = 0;
-    public $deliveryPrice = 0;
-    public $totalAmount = 0;
 
+    public $addressId = 0;
+    public $totalProductCount = 0;            //تعداد کلی محصول
+    public $totalOrginalPrice = 0;               //قیمت اصلی
+    public $totalDiscount = 0;                      //تخفیف
+    public $totalDiscountedPrice = 0;    //قیمت تخفیف خورده
+    public $discountCodeAmount = 0;                  //کد تخفیف
+    public $deliveryPrice = 0;              //هزینه ارسال
+    public $totalAmount = 0;                 //قیمت نهایی و کلی
 
 
     public function mount(){
         $this->seoConfig();
+
         if (Session::get('inVoiceFormCart')) {
             $this->deliveries = Session::get('inVoiceFormCart');
             $this->totalProductCount = $invoice['totalProductCount'];
-            $this->totalOrginalPrice = $invoice['totalProductCount'];
-            $this->totalDiscount = $invoice['totalProductCount'];
-            $this->totalDiscountedPrice  = $invoice['totalProductCount'];
-
+            $this->totalOrginalPrice = $invoice['totalOrginalPrice'];
+            $this->totalDiscount = $invoice['totalDiscount'];
+            $this->totalDiscountedPrice  = $invoice['totalDiscountedPrice'];
         }
 
 
@@ -59,7 +58,6 @@ class Index extends Component{
 
         $this->deliveryPrice = $this->deliveries->first()->price;
         $this->totalAmountForPayment($this->totalDiscountedPrice, $this->deliveryPrice , $this->discountCodeAmount);
-
     }
 
 
@@ -75,7 +73,6 @@ class Index extends Component{
 
     public function totalAmountForPayment($totalDiscountedPrice, $deliveryPrice, $discountCodeAmount){
         $this->totalAmount = ($totalDiscountedPrice + $deliveryPrice) - $discountCodeAmount;
-
     }
 
 
@@ -83,7 +80,6 @@ class Index extends Component{
     public function changeDeliveryPrice($deliveryId){
         $newDeliveryPrice = $this->deliveryPrice = DeliveryMethod::query()->where('id', $deliveryId)->pluck('price')->first();
         $this->totalAmountForPayment($this->totalDiscountedPrice, $newDeliveryPrice , $this->discountCodeAmount);
-
     }
 
 
@@ -178,13 +174,12 @@ class Index extends Component{
 
         $code = Coupon::query()->where('code', $validatedData['code'])->first();
         $this->applyDiscount($code);
-
     }
 
 
 
-    public function applyDiscount($code)
-    {
+    public function applyDiscount($code){
+
         if (!$code->is_active || Carbon::parse($code->expires_at)->isPast()) {
             session()->flash('error', 'این کد تخفیف معتبر نیست منقضی شده است');
             return;
