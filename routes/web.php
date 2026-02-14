@@ -20,6 +20,10 @@ use App\Livewire\Admin\Order\Details as orderDetails;
 use App\Livewire\Admin\Transaction\Index as transactionIndex;
 use App\Livewire\Admin\Auth\Index as authIndexAdmin;
 
+
+use App\Livewire\Seller\Auth\Index as authIndexSeller;
+
+
 use App\Livewire\Client\Auth\Index as ClientIndex;
 use App\Livewire\Client\Home\Home as ClientHome;
 use App\Livewire\Client\Payment\Callback as PaymentCallback;
@@ -32,6 +36,7 @@ use App\Livewire\Client\Shipping\Index as ShippingIndex;
 
 // Admin routes
 Route::get('/auth/admin', authIndexAdmin::class)->name('admin.auth.index')->middleware('guest:admin');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
+Route::get('/auth/admin/logout', [authIndexAdmin::class, 'Logout'])->name('admin.auth.logout')->middleware('auth:admin');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/dashboard', DashboardIndex::class)->name('admin.dashboard.index');
@@ -59,6 +64,20 @@ Route::middleware(['auth:admin'])->group(function () {
 Route::get('/sitemap.xml', function (){
     return view('.sitemap')->name('sitemap');
 });
+
+
+
+
+//seller-------------------------------------------------
+Route::get('/seller/auth', authIndexSeller::class)->name('seller.auth.index')->middleware('guest:seller');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
+Route::get('/seller/auth/logout', [authIndexSeller::class, 'Logout'])->name('seller.auth.logout')->middleware('auth:seller');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
+
+
+
+
+
+
+
 
 //client--------------------------------------------------------------------------------------------------------------------------------
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Livewire\Component;
 
+
 class Index extends Component{
     public $email_number;
 
@@ -50,7 +51,7 @@ class Index extends Component{
     public function clientLogout(){
         session()->flush();                            //1.حذف سشن
         Auth::logout(); //2.خروج کاربر از حساب کاربری
-        return redirect()->route('client.auth.index');    //3.رفتن به صفحه مورد نظر
+        return redirect()->route('home');    //3.رفتن به صفحه مورد نظر
     }
 
 
