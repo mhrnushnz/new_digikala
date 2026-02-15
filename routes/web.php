@@ -19,11 +19,10 @@ use App\Livewire\Admin\Order\Index as orderIndex;
 use App\Livewire\Admin\Order\Details as orderDetails;
 use App\Livewire\Admin\Transaction\Index as transactionIndex;
 use App\Livewire\Admin\Auth\Index as authIndexAdmin;
-
-
+use App\Livewire\Admin\User\Index as userIndex;
+//-------------------------------------------------------------------
 use App\Livewire\Seller\Auth\Index as authIndexSeller;
-
-
+//-------------------------------------------------------------------
 use App\Livewire\Client\Auth\Index as ClientIndex;
 use App\Livewire\Client\Home\Home as ClientHome;
 use App\Livewire\Client\Payment\Callback as PaymentCallback;
@@ -34,7 +33,7 @@ use App\Livewire\Client\Shipping\Index as ShippingIndex;
 
 
 
-// Admin routes
+//Admin routes-------------------------------------------------------------------
 Route::get('/auth/admin', authIndexAdmin::class)->name('admin.auth.index')->middleware('guest:admin');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
 Route::get('/auth/admin/logout', [authIndexAdmin::class, 'Logout'])->name('admin.auth.logout')->middleware('auth:admin');       //میدل ور گست اینجا برای اینه که اگر کاربر لاگین کرد
 
@@ -58,14 +57,9 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/order', orderIndex::class)->name('admin.order.index');
     Route::get('/order/{order}', orderDetails::class)->name('admin.order.details');
     Route::get('/transaction', transactionIndex::class)->name('admin.transaction.index');
+    Route::get('/user', userIndex::class)->name('admin.user.index');
+
 });
-
-
-Route::get('/sitemap.xml', function (){
-    return view('.sitemap')->name('sitemap');
-});
-
-
 
 
 //seller-------------------------------------------------
@@ -74,13 +68,7 @@ Route::get('/seller/auth/logout', [authIndexSeller::class, 'Logout'])->name('sel
 
 
 
-
-
-
-
-
-//client--------------------------------------------------------------------------------------------------------------------------------
-
+//client----------------------------------------------------------------------------------------------------------
 //بعضی از صفحات مهم نیست که کاربر لاگین کرده یا نه برای همین هیچی بهشون نمیدیم
 Route::get('/', ClientHome::class)->name('home');
 Route::get('/client/product/{p_code?}/{slug?}', ClientProduct::class)->name('client.product.index');
@@ -109,3 +97,15 @@ Route::get('/checkout/cart', CartIndex::class)->name('client.cart.index');      
 Route::get('/client/shipping', ShippingIndex::class)->name('client.shipping.index');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
 Route::get('/client/payment/callback', PaymentCallback::class)->name('client.payment.callback');          //تا زمانی که کاربر لاگین نشه نمایش داده نشه و وقتی تو url ادرس صفحه رو وارد کردیم بره تو صفحه ورود به حساب کار بری ! برای شخصی سازی و ئارد کرد ادرس صفحه ورود باید به این مسیر بریم digikala/bootstrap/app.php
 
+
+
+
+
+//------------------------------------------------------------------------------------
+//2 نکته مهم!
+
+//کلا دو نوع میدلور داریم auth و guest ک اینا پیشفرض لاراول اند
+
+
+//ب هر اندازه ای ک بخواهیم میتوانیم نقش تولید کنیم اما یک نقش پیشفرض با نام web که از
+//مدل user پروایدر میکنه وجود دارد بجز آن نقش های admin - seller رو میتونیم خورمون بسازیم

@@ -1,11 +1,13 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+
+//محتویات داخل مادل فروشندگان رو ازم مائل ادمین باید برداریم و اینجا بزاریم یادت نره!
+
 
 class Seller extends Authenticatable
 {

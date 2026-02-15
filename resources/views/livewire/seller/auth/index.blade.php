@@ -2,10 +2,11 @@
     <div class="form-form-wrap">
         <div class="form-container">
             <form wire:submit.prevent="Submit" class="" autocomplete="on">
+                @csrf
                 <div class="form-content">
 
-                    <h1 class="">ورودی</h1>
-                    <p class="">برای ادامه به حساب کاربری خود وارد شوید</p>
+                    <h1 class=""> ورودی به عنوان فروشنده</h1>
+                    <p class="">برای ادامه به حساب کاربری فروشنده خود وارد شوید</p>
 
                     @if(session()->has('message'))
                         <div class="alert alert-danger" style=" text-align: center">

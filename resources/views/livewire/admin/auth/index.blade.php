@@ -4,8 +4,8 @@
             <form wire:submit.prevent="Submit" class="" autocomplete="on">
                 <div class="form-content">
 
-                    <h1 class="">ورودی</h1>
-                    <p class="">برای ادامه به حساب کاربری خود وارد شوید</p>
+                    <h1 class="">ورودی به عنوان ادمین</h1>
+                    <p class="">برای ادامه به حساب کاربری ادمین خود وارد شوید</p>
 
                     @if(session()->has('message'))
                         <div class="alert alert-danger" style=" text-align: center">

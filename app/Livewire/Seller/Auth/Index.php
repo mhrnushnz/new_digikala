@@ -11,23 +11,18 @@ class Index extends Component{
 
     public function Submit()
     {
-
         $validatedData = $this->validate([
-            'email' => 'required|exists:Sellers,email', //نام استان
-            'password' => 'required',    //آیدی کشور استان
+            'email' => 'required|exists:Sellers,email',
+            'password' => 'required',
         ], [
             //نوشتن ارور های دیگر و سفارشی
             '*.required' => 'پر کردن فیلد الزامی است',
             'email.exists' => 'ایمیل نامعتبر است',
-            //
         ]);
 
 
-
-
-
         $credentials = ['email' => $validatedData['email'], 'password' => $validatedData['password']];
-        $seller = Auth::guard('seller');      //دریافت نقش ادمین
+        $seller = Auth::guard('seller');      //دریافت نقش فروشنده
 
 
         if ($seller->attempt($credentials)) {
@@ -44,9 +39,10 @@ class Index extends Component{
 
 
     public function Logout(){
-        session()->flush();//1.حذف سشن
+        session()->flush();                                      //1.حذف سشن
+
         Auth::guard('seller')->logout();   //2.خروج ادمین از حساب کاربری اگر گارد ادمین رو مشخص نمیکردیم اگر کاربر لاگ اوت میگرد میدلور آس از گارد پیش فرض که web هست که از مدل user پروایدر میکنه حذف میکرد ینی کاربر از سمت کلاینت هم لاگ اوت میشد!
-        return redirect()->route('client.auth.index');    //3.رفتن به صفحه مورد نظر
+        return redirect()->route('home');    //3.رفتن به صفحه مورد نظر
     }
 
 

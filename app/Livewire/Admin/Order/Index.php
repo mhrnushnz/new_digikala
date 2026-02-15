@@ -65,6 +65,10 @@ class Index extends Component
             $ordersQuery->where('status','=', $_GET['status']);    //باید قبل از paginate شرط رو بنویسیم(فیلتر کردن بر اساس نوع استاتوس)
         }
 
+        if(isset($_GET['user']) and $_GET['user'] != 'all'){
+            $ordersQuery->where('user_id','=', $_GET['user']);    //باید قبل از paginate شرط رو بنویسیم(فیلتر کردن بر اساس نوع استاتوس)
+        }
+
 
 
     $orders = $ordersQuery->paginate(10);
